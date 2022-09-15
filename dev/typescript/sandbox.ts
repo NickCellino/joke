@@ -1,4 +1,4 @@
-function foo (bar: string) {
+function foo (): any {
   console.log('bar')
   const f = { sdf: 'hello' }
 }
