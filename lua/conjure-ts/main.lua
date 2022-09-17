@@ -10,8 +10,17 @@ do
   _2amodule_2a["aniseed/locals"] = {}
   _2amodule_locals_2a = (_2amodule_2a)["aniseed/locals"]
 end
+local autoload = (require("conjure-ts.aniseed.autoload")).autoload
+local a, nvim = autoload("conjure-ts.aniseed.core"), autoload("conjure-ts.aniseed.nvim")
+do end (_2amodule_locals_2a)["a"] = a
+_2amodule_locals_2a["nvim"] = nvim
+local function print_cwd()
+  return print(vim.fn.getcwd())
+end
+_2amodule_2a["print-cwd"] = print_cwd
+vim.keymap.set("n", "<leader>asdf", print_cwd, {noremap = true})
 local function init()
-  return print("Hello, World! We're doing real cool stuff here...")
+  return nil
 end
 _2amodule_2a["init"] = init
 return _2amodule_2a
