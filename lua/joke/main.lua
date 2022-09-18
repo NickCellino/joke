@@ -1,5 +1,5 @@
 local _2afile_2a = "fnl/joke/main.fnl"
-local _2amodule_name_2a = "conjure-ts.main"
+local _2amodule_name_2a = "joke.main"
 local _2amodule_2a
 do
   package.loaded[_2amodule_name_2a] = {}
@@ -11,7 +11,7 @@ do
   _2amodule_locals_2a = (_2amodule_2a)["aniseed/locals"]
 end
 local autoload = (require("joke.aniseed.autoload")).autoload
-local a, nvim, str, ts_utils = autoload("conjure-ts.aniseed.core"), autoload("conjure-ts.aniseed.nvim"), autoload("conjure-ts.aniseed.string"), autoload("nvim-treesitter.ts_utils")
+local a, nvim, str, ts_utils = autoload("joke.aniseed.core"), autoload("joke.aniseed.nvim"), autoload("joke.aniseed.string"), autoload("nvim-treesitter.ts_utils")
 do end (_2amodule_locals_2a)["a"] = a
 _2amodule_locals_2a["nvim"] = nvim
 _2amodule_locals_2a["str"] = str
@@ -26,7 +26,7 @@ local function has_ts_parser_3f()
 end
 _2amodule_2a["has-ts-parser?"] = has_ts_parser_3f
 local function dbg(...)
-  return print(str.join("", a.concat({"[DEBUG]: "}, {...})))
+  return print(str.join(" ", a.concat({"[DEBUG]:"}, {...})))
 end
 _2amodule_2a["dbg"] = dbg
 local traversed_nodes = {}
@@ -34,9 +34,8 @@ local traversed_nodes = {}
 local function call_expression_name(call_exp_node)
   local member_expression = call_exp_node:child(0)
   local identifier = member_expression:child(0)
-  dbg("member-expression", member_expression)
-  dbg("identifier", identifier)
-  return a.get(ts_utils.get_node_text(member_expression), 1)
+  local bufnr = vim.api.nvim_get_current_buf()
+  return vim.treesitter.query.get_node_text(member_expression, bufnr)
 end
 _2amodule_2a["call-expression-name"] = call_expression_name
 local function dbg_node(node)

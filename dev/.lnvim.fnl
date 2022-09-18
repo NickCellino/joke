@@ -1,5 +1,5 @@
 (module lnvim
-  {autoload {cts conjure-ts.main}})
+  {autoload {jk joke.main}})
 
-(cts.print-cwd)
+(jk.print-cwd)
 

@@ -1,7 +1,7 @@
-(module conjure-ts.main
-  {autoload {a conjure-ts.aniseed.core
-             nvim conjure-ts.aniseed.nvim
-             str conjure-ts.aniseed.string
+(module joke.main
+  {autoload {a joke.aniseed.core
+             nvim joke.aniseed.nvim
+             str joke.aniseed.string
              ts-utils nvim-treesitter.ts_utils}})
 
 (defn print-cwd []
@@ -12,9 +12,9 @@
     (and ok? parser)))
 
 (defn dbg [...]
-  (print (str.join "" (a.concat
-                        ["[DEBUG]: "]
-                        [...]))))
+  (print (str.join " " (a.concat
+                         ["[DEBUG]:"]
+                         [...]))))
 
 ; For debugging...
 (var traversed-nodes [])
@@ -24,10 +24,9 @@
 
 (defn call-expression-name [call-exp-node]
   (let [member-expression (call-exp-node:child 0)
-        identifier (member-expression:child 0)]
-    (dbg "member-expression" member-expression)
-    (dbg "identifier" identifier)
-    (a.get (ts-utils.get_node_text member-expression) 1)))
+        identifier (member-expression:child 0)
+        bufnr (vim.api.nvim_get_current_buf)]
+    (vim.treesitter.query.get_node_text member-expression bufnr)))
 
 (defn dbg-node [node]
   (dbg "NODE" node)
