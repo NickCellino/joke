@@ -23,6 +23,19 @@ local function has_ts_parser_3f()
 end
 _2amodule_2a["has-ts-parser?"] = has_ts_parser_3f
 local traversed_nodes = {}
+local function strip_first_and_last_chars(s)
+  local len_str = string.len(s)
+  return string.sub(s, 2, (len_str - 1))
+end
+_2amodule_2a["strip-first-and-last-chars"] = strip_first_and_last_chars
+local function test_name_from_call_exp(exp)
+  local arguments = exp:child(1)
+  local first_arg = arguments:child(1)
+  local bufnr = vim.api.nvim_get_current_buf()
+  local test_name_w_quotes = vim.treesitter.query.get_node_text(first_arg, bufnr)
+  return strip_first_and_last_chars(test_name_w_quotes)
+end
+_2amodule_2a["test-name-from-call-exp"] = test_name_from_call_exp
 local function call_expression_name(call_exp_node)
   local member_expression = call_exp_node:child(0)
   local identifier = member_expression:child(0)
@@ -53,7 +66,25 @@ local function get_enclosing_test(node)
 end
 _2amodule_2a["get-enclosing-test"] = get_enclosing_test
 local function get_enclosing_test_at_cursor()
-  return get_enclosing_test(ts_utils.get_node_at_cursor())
+  local node = get_enclosing_test(ts_utils.get_node_at_cursor())
+  return print(test_name_from_call_exp(node))
 end
 _2amodule_2a["get-enclosing-test-at-cursor"] = get_enclosing_test_at_cursor
+local kept_node = nil
+local function keep_test_node()
+  local node = get_enclosing_test(ts_utils.get_node_at_cursor())
+  kept_node = node
+  return nil
+end
+_2amodule_2a["keep-test-node"] = keep_test_node
+local function get_kept_node()
+  return kept_node
+end
+_2amodule_2a["get-kept-node"] = get_kept_node
+--[[ (def node (get-kept-node)) (test-name-from-call-exp node) (let [arguments
+ (node:child 1)
+ first-arg
+ (arguments:child 1)
+ test-name
+ (vim.treesitter.query.get_node_text first-arg 1)] (strip-first-and-last-chars test-name)) ]]--
 return _2amodule_2a

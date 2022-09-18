@@ -20,8 +20,12 @@ _2amodule_locals_2a["ts"] = ts
 _2amodule_locals_2a["ts-utils"] = ts_utils
 local dbg = dbgm.dbg
 _2amodule_2a["dbg"] = dbg
+local foo = "BAR"
+_2amodule_2a["foo"] = foo
+local hello = "world"
 local function init_mappings()
-  return vim.keymap.set("n", "<leader>asdf", ts["get-enclosing-test-at-cursor"], {noremap = true})
+  vim.keymap.set("n", "<leader>asdf", ts["get-enclosing-test-at-cursor"], {noremap = true})
+  return vim.keymap.set("n", "<leader>kn", ts["keep-test-node"], {noremap = true})
 end
 _2amodule_2a["init-mappings"] = init_mappings
 local function init()

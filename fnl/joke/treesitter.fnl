@@ -12,6 +12,19 @@
 ; For debugging...
 (var traversed-nodes [])
 
+(defn strip-first-and-last-chars [s]
+  (let [len-str (string.len s)]
+    (string.sub s 2 (- len-str 1))))
+
+(defn test-name-from-call-exp [exp]
+  (let [arguments (exp:child 1)
+        first-arg (arguments:child 1)
+        bufnr (vim.api.nvim_get_current_buf)
+        test-name-w-quotes (vim.treesitter.query.get_node_text first-arg bufnr)]
+   (strip-first-and-last-chars test-name-w-quotes)))
+
+
+
 (defn call-expression-name [call-exp-node]
   (let [member-expression (call-exp-node:child 0)
         identifier (member-expression:child 0)
@@ -38,6 +51,27 @@
             nil))))))
 
 (defn get-enclosing-test-at-cursor []
-  (get-enclosing-test (ts-utils.get_node_at_cursor)))
+  (let [node (get-enclosing-test (ts-utils.get_node_at_cursor))]
+    (print (test-name-from-call-exp node))))
 
+(var kept-node nil) 
 
+(defn keep-test-node []
+  (let [node (get-enclosing-test (ts-utils.get_node_at_cursor))]
+    (set kept-node node)))
+
+(defn get-kept-node []
+  kept-node)
+
+(comment
+  (def node (get-kept-node))
+  (test-name-from-call-exp node)
+
+  ; child 1 is arguments
+  ; child 1 of args is string 
+  ; this is the test name 
+  (let [arguments (node:child 1)
+        first-arg (arguments:child 1)
+        test-name (vim.treesitter.query.get_node_text first-arg 1)]
+    (strip-first-and-last-chars test-name)))
+    
