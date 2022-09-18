@@ -1,5 +1,4 @@
 (module lnvim
   {autoload {jk joke.main}})
 
-(jk.print-cwd)
-
+(set vim.g.joke-dbg false)

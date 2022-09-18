@@ -13,5 +13,5 @@ end
 local autoload = (require("nvim-local-fennel.aniseed.autoload")).autoload
 local jk = autoload("joke.main")
 do end (_2amodule_locals_2a)["jk"] = jk
-jk["print-cwd"]()
+vim.g["joke-dbg"] = false
 return _2amodule_2a
