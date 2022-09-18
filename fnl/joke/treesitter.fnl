@@ -23,8 +23,6 @@
         test-name-w-quotes (vim.treesitter.query.get_node_text first-arg bufnr)]
    (strip-first-and-last-chars test-name-w-quotes)))
 
-
-
 (defn call-expression-name [call-exp-node]
   (let [member-expression (call-exp-node:child 0)
         identifier (member-expression:child 0)
@@ -52,7 +50,7 @@
 
 (defn get-enclosing-test-at-cursor []
   (let [node (get-enclosing-test (ts-utils.get_node_at_cursor))]
-    (print (test-name-from-call-exp node))))
+    (test-name-from-call-exp node)))
 
 (var kept-node nil) 
 

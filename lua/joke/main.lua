@@ -11,20 +11,23 @@ do
   _2amodule_locals_2a = (_2amodule_2a)["aniseed/locals"]
 end
 local autoload = (require("joke.aniseed.autoload")).autoload
-local a, dbgm, mapping, nvim, ts, ts_utils = autoload("joke.aniseed.core"), autoload("joke.dbg"), autoload("joke.mapping"), autoload("joke.aniseed.nvim"), autoload("joke.treesitter"), autoload("nvim-treesitter.ts_utils")
+local a, dbgm, jest, mapping, nvim, ts, ts_utils = autoload("joke.aniseed.core"), autoload("joke.dbg"), autoload("joke.jest"), autoload("joke.mapping"), autoload("joke.aniseed.nvim"), autoload("joke.treesitter"), autoload("nvim-treesitter.ts_utils")
 do end (_2amodule_locals_2a)["a"] = a
 _2amodule_locals_2a["dbgm"] = dbgm
+_2amodule_locals_2a["jest"] = jest
 _2amodule_locals_2a["mapping"] = mapping
 _2amodule_locals_2a["nvim"] = nvim
 _2amodule_locals_2a["ts"] = ts
 _2amodule_locals_2a["ts-utils"] = ts_utils
 local dbg = dbgm.dbg
 _2amodule_2a["dbg"] = dbg
-local foo = "BAR"
-_2amodule_2a["foo"] = foo
-local hello = "world"
+local function execute_test_at_cursor()
+  local test = ts["get-enclosing-test-at-cursor"]()
+  return jest["execute-test"](test)
+end
+_2amodule_2a["execute-test-at-cursor"] = execute_test_at_cursor
 local function init_mappings()
-  vim.keymap.set("n", "<leader>asdf", ts["get-enclosing-test-at-cursor"], {noremap = true})
+  vim.keymap.set("n", "<leader>asdf", execute_test_at_cursor, {noremap = true})
   return vim.keymap.set("n", "<leader>kn", ts["keep-test-node"], {noremap = true})
 end
 _2amodule_2a["init-mappings"] = init_mappings

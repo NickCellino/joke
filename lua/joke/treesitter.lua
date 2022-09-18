@@ -67,7 +67,7 @@ end
 _2amodule_2a["get-enclosing-test"] = get_enclosing_test
 local function get_enclosing_test_at_cursor()
   local node = get_enclosing_test(ts_utils.get_node_at_cursor())
-  return print(test_name_from_call_exp(node))
+  return test_name_from_call_exp(node)
 end
 _2amodule_2a["get-enclosing-test-at-cursor"] = get_enclosing_test_at_cursor
 local kept_node = nil

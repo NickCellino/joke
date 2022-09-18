@@ -1,6 +1,7 @@
 (module joke.main
   {autoload {a joke.aniseed.core
              dbgm joke.dbg
+             jest joke.jest
              mapping joke.mapping
              nvim joke.aniseed.nvim
              ts-utils nvim-treesitter.ts_utils
@@ -8,14 +9,15 @@
 
 (def dbg dbgm.dbg)
 
-(def foo "BAR")
-(var hello "world")
+(defn execute-test-at-cursor []
+  (let [test (ts.get-enclosing-test-at-cursor)]
+    (jest.execute-test test)))
 
 (defn init-mappings []
   (vim.keymap.set
    :n
    "<leader>asdf"
-   ts.get-enclosing-test-at-cursor
+   execute-test-at-cursor
    {:noremap true})
 
   (vim.keymap.set
