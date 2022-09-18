@@ -1,6 +1,7 @@
-function foo (): any {
+function foo (): void {
   console.log('bar')
-  const f = { sdf: 'hello' }
+  const data = { name: 'Nick' }
+  console.log(data)
 }
 
 foo()
