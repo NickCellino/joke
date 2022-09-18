@@ -1,5 +1,5 @@
 local _2afile_2a = "fnl/aniseed/fennel.fnl"
-local _2amodule_name_2a = "conjure-ts.aniseed.fennel"
+local _2amodule_name_2a = "joke.aniseed.fennel"
 local _2amodule_2a
 do
   package.loaded[_2amodule_name_2a] = {}
@@ -10,8 +10,8 @@ do
   _2amodule_2a["aniseed/locals"] = {}
   _2amodule_locals_2a = (_2amodule_2a)["aniseed/locals"]
 end
-local autoload = (require("conjure-ts.aniseed.autoload")).autoload
-local a, fs, nvim, str = autoload("conjure-ts.aniseed.core"), autoload("conjure-ts.aniseed.fs"), autoload("conjure-ts.aniseed.nvim"), autoload("conjure-ts.aniseed.string")
+local autoload = (require("joke.aniseed.autoload")).autoload
+local a, fs, nvim, str = autoload("joke.aniseed.core"), autoload("joke.aniseed.fs"), autoload("joke.aniseed.nvim"), autoload("joke.aniseed.string")
 do end (_2amodule_locals_2a)["a"] = a
 _2amodule_locals_2a["fs"] = fs
 _2amodule_locals_2a["nvim"] = nvim
@@ -37,7 +37,7 @@ _2amodule_2a["sync-rtp"] = sync_rtp
 local state = {["compiler-loaded?"] = false}
 _2amodule_locals_2a["state"] = state
 local function impl()
-  local compiler = require("conjure-ts.aniseed.deps.fennel")
+  local compiler = require("joke.aniseed.deps.fennel")
   if not state["compiler-loaded?"] then
     state["compiler-loaded?"] = true
     sync_rtp(compiler)

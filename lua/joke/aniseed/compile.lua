@@ -1,5 +1,5 @@
 local _2afile_2a = "fnl/aniseed/compile.fnl"
-local _2amodule_name_2a = "conjure-ts.aniseed.compile"
+local _2amodule_name_2a = "joke.aniseed.compile"
 local _2amodule_2a
 do
   package.loaded[_2amodule_name_2a] = {}
@@ -10,14 +10,14 @@ do
   _2amodule_2a["aniseed/locals"] = {}
   _2amodule_locals_2a = (_2amodule_2a)["aniseed/locals"]
 end
-local autoload = (require("conjure-ts.aniseed.autoload")).autoload
-local a, fennel, fs, nvim = autoload("conjure-ts.aniseed.core"), autoload("conjure-ts.aniseed.fennel"), autoload("conjure-ts.aniseed.fs"), autoload("conjure-ts.aniseed.nvim")
+local autoload = (require("joke.aniseed.autoload")).autoload
+local a, fennel, fs, nvim = autoload("joke.aniseed.core"), autoload("joke.aniseed.fennel"), autoload("joke.aniseed.fs"), autoload("joke.aniseed.nvim")
 do end (_2amodule_locals_2a)["a"] = a
 _2amodule_locals_2a["fennel"] = fennel
 _2amodule_locals_2a["fs"] = fs
 _2amodule_locals_2a["nvim"] = nvim
 local function wrap_macros(code, opts)
-  local macros_module = "conjure-ts.aniseed.macros"
+  local macros_module = "joke.aniseed.macros"
   local filename
   do
     local _1_ = a.get(opts, "filename")

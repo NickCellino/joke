@@ -1,4 +1,4 @@
-local _2afile_2a = "fnl/conjure-ts/main.fnl"
+local _2afile_2a = "fnl/joke/main.fnl"
 local _2amodule_name_2a = "conjure-ts.main"
 local _2amodule_2a
 do
@@ -10,7 +10,7 @@ do
   _2amodule_2a["aniseed/locals"] = {}
   _2amodule_locals_2a = (_2amodule_2a)["aniseed/locals"]
 end
-local autoload = (require("conjure-ts.aniseed.autoload")).autoload
+local autoload = (require("joke.aniseed.autoload")).autoload
 local a, nvim, str, ts_utils = autoload("conjure-ts.aniseed.core"), autoload("conjure-ts.aniseed.nvim"), autoload("conjure-ts.aniseed.string"), autoload("nvim-treesitter.ts_utils")
 do end (_2amodule_locals_2a)["a"] = a
 _2amodule_locals_2a["nvim"] = nvim

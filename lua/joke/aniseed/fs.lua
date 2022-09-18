@@ -1,5 +1,5 @@
 local _2afile_2a = "fnl/aniseed/fs.fnl"
-local _2amodule_name_2a = "conjure-ts.aniseed.fs"
+local _2amodule_name_2a = "joke.aniseed.fs"
 local _2amodule_2a
 do
   package.loaded[_2amodule_name_2a] = {}
@@ -10,8 +10,8 @@ do
   _2amodule_2a["aniseed/locals"] = {}
   _2amodule_locals_2a = (_2amodule_2a)["aniseed/locals"]
 end
-local autoload = (require("conjure-ts.aniseed.autoload")).autoload
-local a, nvim = autoload("conjure-ts.aniseed.core"), autoload("conjure-ts.aniseed.nvim")
+local autoload = (require("joke.aniseed.autoload")).autoload
+local a, nvim = autoload("joke.aniseed.core"), autoload("joke.aniseed.nvim")
 do end (_2amodule_locals_2a)["a"] = a
 _2amodule_locals_2a["nvim"] = nvim
 local function basename(path)
