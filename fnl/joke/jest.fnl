@@ -1,5 +1,7 @@
 (module joke.jest
   {autoload {a joke.aniseed.core
+             buffer joke.buffer
+             dbg joke.dbg
              str joke.aniseed.string}})
 
 (defn get-cmd [test]
@@ -8,12 +10,21 @@
 (defn log-msgs [_ msgs]
   (when msgs
     (each [_ value (pairs msgs)]
-      (print value))))
+      (dbg.dbg value))))
+
+(let [b ["foo" "bar" "" "baz"]]
+  (a.filter #(not (a.empty? $1)) b))
 
 (defn log-to-buffer [_ msgs]
-  (let [bufnr (vim.api.nvim_get_current_buf)]
-    (when msgs
-      (vim.api.nvim_buf_set_lines bufnr -1 -1 false (a.map #(.. "// " $1) msgs)))))
+  (when msgs
+    (let [msgs (a.filter #(not (a.empty? $1)) msgs)]
+      (log-msgs _ msgs)
+      (buffer.append-to-buf msgs))))
+
+(defn handle-execute-done [_ code _]
+  (if (= code 0)
+    (print "Test(s) passed. Press <leader>ob to view results")
+    (print "Some tests failed. Press <leader>ob to view results")))
 
 (defn execute-cmd [cmd]
   (vim.fn.jobstart
@@ -21,9 +32,8 @@
     {:stdout_buffered true
      :stderr_buffered true
      :on_stdout log-to-buffer
-     :on_stderr log-to-buffer}))
-;     :on_stdout log-msgs
-;     :on_stderr log-msgs}))
+     :on_stderr log-to-buffer
+     :on_exit handle-execute-done}))
 
 (defn execute-test [test]
   (let [cmd (get-cmd test)]
