@@ -1,6 +1,7 @@
 (module joke.main
   {autoload {a joke.aniseed.core
              buffer joke.buffer
+             core joke
              dbgm joke.dbg
              jest joke.jest
              mapping joke.mapping
@@ -30,7 +31,12 @@
    :n
    "<leader>kn"
    ts.keep-test-node
-   {:noremap true}))
+   {:noremap true})
+
+  (vim.keymap.set
+   :n
+   "<leader>dc"
+   (fn [] ((a.get (core.get-config) :cfg-test)))))
 
 (defn init []
   (init-mappings))

@@ -11,15 +11,12 @@ do
   _2amodule_locals_2a = (_2amodule_2a)["aniseed/locals"]
 end
 local autoload = (require("joke.aniseed.autoload")).autoload
-local a, buffer, dbg, str = autoload("joke.aniseed.core"), autoload("joke.buffer"), autoload("joke.dbg"), autoload("joke.aniseed.string")
+local a, buffer, core, dbg, str = autoload("joke.aniseed.core"), autoload("joke.buffer"), autoload("joke"), autoload("joke.dbg"), autoload("joke.aniseed.string")
 do end (_2amodule_locals_2a)["a"] = a
 _2amodule_locals_2a["buffer"] = buffer
+_2amodule_locals_2a["core"] = core
 _2amodule_locals_2a["dbg"] = dbg
 _2amodule_locals_2a["str"] = str
-local function get_cmd(test)
-  return {"npm", "test", "--", "--testNamePattern", test}
-end
-_2amodule_2a["get-cmd"] = get_cmd
 local function log_msgs(_, msgs)
   if msgs then
     for _0, value in pairs(msgs) do
@@ -31,22 +28,10 @@ local function log_msgs(_, msgs)
   end
 end
 _2amodule_2a["log-msgs"] = log_msgs
-do
-  local b = {"foo", "bar", "", "baz"}
-  local function _2_(_241)
-    return not a["empty?"](_241)
-  end
-  a.filter(_2_, b)
-end
 local function log_to_buffer(_, msgs)
   if msgs then
-    local msgs0
-    local function _3_(_241)
-      return not a["empty?"](_241)
-    end
-    msgs0 = a.filter(_3_, msgs)
-    log_msgs(_, msgs0)
-    return buffer["append-to-buf"](msgs0)
+    log_msgs(_, msgs)
+    return buffer["append-to-buf"](msgs)
   else
     return nil
   end
@@ -65,6 +50,7 @@ local function execute_cmd(cmd)
 end
 _2amodule_2a["execute-cmd"] = execute_cmd
 local function execute_test(test)
+  local get_cmd = a.get(core["get-config"](), "jest-cmd")
   local cmd = get_cmd(test)
   return execute_cmd(cmd)
 end

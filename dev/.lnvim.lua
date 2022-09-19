@@ -11,7 +11,11 @@ do
   _2amodule_locals_2a = (_2amodule_2a)["aniseed/locals"]
 end
 local autoload = (require("nvim-local-fennel.aniseed.autoload")).autoload
-local jk = autoload("joke.main")
+local jk = autoload("joke")
 do end (_2amodule_locals_2a)["jk"] = jk
 vim.g["joke-dbg"] = false
+local function _1_(test_name)
+  return {"npm", "test", "--", "--testNamePattern", test_name}
+end
+jk.setup({["jest-cmd"] = _1_})
 return _2amodule_2a
