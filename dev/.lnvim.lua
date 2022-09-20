@@ -17,5 +17,5 @@ vim.g["joke-dbg"] = false
 local function _1_(test_name)
   return {"npm", "test", "--", "--testNamePattern", test_name}
 end
-jk.setup({["jest-cmd"] = _1_})
+jk.setup({foo = "bar", ["jest-cmd"] = _1_})
 return _2amodule_2a

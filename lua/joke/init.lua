@@ -11,26 +11,12 @@ do
   _2amodule_locals_2a = (_2amodule_2a)["aniseed/locals"]
 end
 local autoload = (require("joke.aniseed.autoload")).autoload
-local a = autoload("joke.aniseed.core")
+local a, config = autoload("joke.aniseed.core"), autoload("joke.config")
 do end (_2amodule_locals_2a)["a"] = a
-local config = nil
-local function default_jest_cmd(test_name)
-  return {"npm", "test", "--", "--testNamePattern", test_name}
-end
-_2amodule_2a["default-jest-cmd"] = default_jest_cmd
-local defaults
-local function _1_()
-  return a.println("USING DEFAULT CONFIG")
-end
-defaults = {["jest-cmd"] = default_jest_cmd, ["cfg-test"] = _1_}
-_2amodule_2a["defaults"] = defaults
-local function get_config()
-  return config
-end
-_2amodule_2a["get-config"] = get_config
+_2amodule_locals_2a["config"] = config
 local function setup(cfg)
-  config = a.merge(defaults, cfg)
-  return config
+  print("in setup")
+  return config["init-config"](cfg)
 end
 _2amodule_2a["setup"] = setup
 return _2amodule_2a

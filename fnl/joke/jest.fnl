@@ -1,7 +1,7 @@
 (module joke.jest
   {autoload {a joke.aniseed.core
              buffer joke.buffer
-             core joke
+             config joke.config
              dbg joke.dbg
              str joke.aniseed.string}})
 
@@ -30,7 +30,7 @@
      :on_exit handle-execute-done}))
 
 (defn execute-test [test]
-  (let [get-cmd (a.get (core.get-config) :jest-cmd)
+  (let [get-cmd (config.get-in [:jest-cmd])
         cmd (get-cmd test)]
     (execute-cmd cmd)))
 

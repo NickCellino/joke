@@ -3,10 +3,11 @@
 
 (set vim.g.joke-dbg false)
 
-(jk.setup {:jest-cmd (fn [test-name]
-                       ["npm"
-                        "test"
-                        "--"
-                        "--testNamePattern"
-                        test-name])})
+(jk.setup {:foo "bar"
+           :jest-cmd (fn [test-name]
+                      ["npm"
+                       "test"
+                       "--"
+                       "--testNamePattern"
+                       test-name])})
 

@@ -11,10 +11,10 @@ do
   _2amodule_locals_2a = (_2amodule_2a)["aniseed/locals"]
 end
 local autoload = (require("joke.aniseed.autoload")).autoload
-local a, buffer, core, dbg, str = autoload("joke.aniseed.core"), autoload("joke.buffer"), autoload("joke"), autoload("joke.dbg"), autoload("joke.aniseed.string")
+local a, buffer, config, dbg, str = autoload("joke.aniseed.core"), autoload("joke.buffer"), autoload("joke.config"), autoload("joke.dbg"), autoload("joke.aniseed.string")
 do end (_2amodule_locals_2a)["a"] = a
 _2amodule_locals_2a["buffer"] = buffer
-_2amodule_locals_2a["core"] = core
+_2amodule_locals_2a["config"] = config
 _2amodule_locals_2a["dbg"] = dbg
 _2amodule_locals_2a["str"] = str
 local function log_msgs(_, msgs)
@@ -50,7 +50,7 @@ local function execute_cmd(cmd)
 end
 _2amodule_2a["execute-cmd"] = execute_cmd
 local function execute_test(test)
-  local get_cmd = a.get(core["get-config"](), "jest-cmd")
+  local get_cmd = config["get-in"]({"jest-cmd"})
   local cmd = get_cmd(test)
   return execute_cmd(cmd)
 end
