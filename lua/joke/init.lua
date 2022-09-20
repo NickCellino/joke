@@ -15,7 +15,6 @@ local a, config = autoload("joke.aniseed.core"), autoload("joke.config")
 do end (_2amodule_locals_2a)["a"] = a
 _2amodule_locals_2a["config"] = config
 local function setup(cfg)
-  print("in setup")
   return config["init-config"](cfg)
 end
 _2amodule_2a["setup"] = setup
